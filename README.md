@@ -51,6 +51,7 @@ https://www.youtube.com/watch?v=KF8dF1QS8Go </br>
 https://github.com/mcombeau/philosophers </br>
 https://www.csl.mtu.edu/cs4411.choi/www/Resource/Semaphore.pdf </br>
 https://undo.io/resources/detecting-deadlocks-c-cplusplus/ </br>
+https://database.guide/what-is-lock-granularity/ </br>
 
 Asan (debug):
 
