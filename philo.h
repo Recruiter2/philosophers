@@ -53,7 +53,7 @@ void	*philosopher_routine(void *arg);
 
 long	get_current_time(void);
 
-
+void	monitor_loop(t_data *data);
 
 
 #endif

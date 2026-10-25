@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:45:22 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/24 16:29:09 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/25 17:52:56 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 
 	// the supervisor loop Monitor for deaths
 	// Main thread should sit in a loop here checking if anyone starved
+	monitor_loop(&data);
 	// or if everyone ate enough. If someone dies, it sets.dead_flag = 1.
 	// check_death(&data);
 
