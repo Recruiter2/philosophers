@@ -41,6 +41,11 @@ typedef struct s_data
 	t_philo		*philos;
 }	t_data;
 
+int	init_all(t_data *data);
+
+int	start_simulation(t_data *data);
+
+
 int		check_args(int argc, char **argv, t_data *data);
 int		ft_atoi(const char *c);
 int		check_if_dead(t_data *data);

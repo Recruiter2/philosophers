@@ -6,13 +6,14 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 21:02:08 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/26 02:35:15 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/26 17:37:34 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <time.h>
 /*
 Initialization of the global mutexes, allocates memory, and sets up each
 philosopher. Returns 0 on success, 1 on failure.
@@ -56,4 +57,29 @@ int	init_all(t_data *data)
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_of_philos];
 	}
+	return (0);
+}
+
+int	start_simulation(t_data *data)
+{
+	int	i;
+
+	//Record the exact start time before launching threads
+	data->start_time = get_current_time();
+
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		// initialize the first meal time to the start of the simulation
+		data->philos[i].last_meal_time = data->start_time;
+
+		//create a thread for each philosopher
+		if (pthread_create(&data->philos[i].thread, NULL, &philosopher_routine, &data->philos[i]) != 0)
+		{
+			// Note : in a bulletproof project, we add logic here to join threads already created before return and arror
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

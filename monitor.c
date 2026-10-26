@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 23:59:14 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/25 17:50:56 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/26 23:03:26 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	monitor_loop(t_data *data)
 		pthread_mutex_lock(&data->dead_lock);
 		data->dead_flag = 1; //Signal threads to stop
 		pthread_mutex_unlock(&data->dead_lock);
-		return;
+		return;  //if everyone ate enough, exit the monitor loop
 	}
 	//Sleep for 1ms to prevent the while loop from hogging the CPU
 	usleep(1000);
