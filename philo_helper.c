@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:43:34 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/24 18:41:00 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/25 19:27:51 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	print_action(t_philo *philo, char *action)
 {
 	long	time;
 
+	if (check_if_dead(philo->data))
+		return ;
 	//lock the write_lock so only one thread prints at a time
 	pthread_mutex_lock(&philo->data->write_lock);
 
