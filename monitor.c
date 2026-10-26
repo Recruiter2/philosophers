@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 23:59:14 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/26 23:03:26 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/26 23:06:25 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,18 @@ void	monitor_loop(t_data *data)
 			// Check if this specific philosopher died
 			if (check_philosopher_death(&data->philos[i], data))
 				return ; //Someone died, exit the monitor loop
+
+
+			// Check if this philosopher is still eating (if argument 5 exists)
+			pthread_mutex_unlock(&data->meal_lock);
+			if (data->must_eat_count == -1 || data->philos[i].meals_eaten < data->must_eat_count)
+				all_ate = 0;
+			pthread_mutex_unlock(&data->meal_lock);
+
+			i++;
 		}
-
-		// Check if this philosopher is still eating (if argument 5 exists)
-		pthread_mutex_unlock(&data->meal_lock);
-		if (data->must_eat_count == -1 || data->philos[i].meals_eaten < data->must_eat_count)
-			all_ate = 0;
-		pthread_mutex_unlock(&data->meal_lock);
-
-		i++;
 	}
+
 	// if argument 5 was provided and everyon ate enough, end simulation
 	if (data->must_eat_count != -1 && all_ate == 1)
 	{
@@ -77,6 +79,7 @@ void	monitor_loop(t_data *data)
 		pthread_mutex_unlock(&data->dead_lock);
 		return;  //if everyone ate enough, exit the monitor loop
 	}
+
 	//Sleep for 1ms to prevent the while loop from hogging the CPU
 	usleep(1000);
 }
