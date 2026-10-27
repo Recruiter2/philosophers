@@ -6,14 +6,12 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:37:01 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:55:56 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 02:15:18 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
-#include <stdlib.h>
-#include <time.h>
+
 
 //returns current time in ms
 long	get_current_time(void)

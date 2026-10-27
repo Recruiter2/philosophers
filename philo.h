@@ -1,7 +1,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <bits/pthreadtypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -53,7 +52,6 @@ void	ft_usleep(long time_in_ms, t_data *data);
 
 
 void	print_action(t_philo *philo, char *action);
-int		start_simulation(t_data *data);
 void	*philosopher_routine(void *arg);
 
 long	get_current_time(void);

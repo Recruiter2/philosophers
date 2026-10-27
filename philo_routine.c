@@ -6,14 +6,11 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 00:23:17 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:40:12 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "src/philo.h"
-#include <bits/pthreadtypes.h>
-#include <pthread.h>
 
 //The function each thread will execute
 void	*philosopher_routine(void *arg)
@@ -70,29 +67,3 @@ void	*philosopher_routine(void *arg)
 	}
 	return (NULL);
 }
-/*
-int	start_simulation(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	//Record the absolute start time before threads begin
-	data->start_time = get_current_time();
-	while (i < data->num_of_philos)
-	{
-		// Create a thread for each philosopher, passing their specific struct as the argument
-		if (pthread_create(&data->philos[i].thread, NULL, &philosopher_routine, &data->philos[i]) != 0)
-			return (1);
-		i++;
-	}
-
-	//Wait for all threads to finish (join them)
-	i = 0;
-	while (i < data->num_of_philos)
-	{
-		pthread_join(data->philos[i].thread, NULL);
-		i++;
-	}
-	return (0);
-}
-	//*/

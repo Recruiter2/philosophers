@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 23:59:14 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 13:34:17 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,13 @@ void	monitor_loop(t_data *data)
 
 
 			// Check if this philosopher is still eating (if argument 5 exists)
-			pthread_mutex_unlock(&data->meal_lock);
+			pthread_mutex_lock(&data->meal_lock);
 			if (data->must_eat_count == -1 || data->philos[i].meals_eaten < data->must_eat_count)
 				all_ate = 0;
 			pthread_mutex_unlock(&data->meal_lock);
 
 			i++;
 		}
-	}
 
 	// if argument 5 was provided and everyon ate enough, end simulation
 	if (data->must_eat_count != -1 && all_ate == 1)
@@ -82,6 +81,7 @@ void	monitor_loop(t_data *data)
 
 	//Sleep for 1ms to prevent the while loop from hogging the CPU
 	usleep(1000);
+	}	
 }
 
 

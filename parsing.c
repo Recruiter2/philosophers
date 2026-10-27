@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:19:43 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/23 21:45:33 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:03:24 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	check_args(int argc, char **argv, t_data *data)
 		if (!is_digit_str(argv[i]))
 		{
 			printf("Error: arguments must be positive integers\n");
+			return (1);
 		}
 		i++;
 	}

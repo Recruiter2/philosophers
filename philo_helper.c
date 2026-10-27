@@ -6,13 +6,11 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:43:34 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:40:37 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "src/philo.h"
-#include <pthread.h>
 
 // Safely check if the simulation should stop
 int	check_if_dead(t_data *data)

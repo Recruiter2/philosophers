@@ -6,14 +6,12 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 21:02:08 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:58:18 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <time.h>
+#include "philo.h"
+
 /*
 Initialization of the global mutexes, allocates memory, and sets up each
 philosopher. Returns 0 on success, 1 on failure.
@@ -56,6 +54,7 @@ int	init_all(t_data *data)
 		//couldn't explain
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_of_philos];
+		i++;
 	}
 	return (0);
 }
