@@ -6,13 +6,14 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:37:01 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:55:56 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 #include <stdlib.h>
+#include <time.h>
 
 //returns current time in ms
 long	get_current_time(void)
@@ -63,9 +64,15 @@ void	free_and_destroy(t_data	*data)
 	pthread_mutex_destroy(&data->flag_lock);
 	pthread_mutex_destroy(&data->meal_lock);
 
-	// Free heap-allocated memory (assuming these were malloc'd in init)
+	// Free heap-allocated memory (assuming these were malloc'd in init) and dangling pointers
 	if (data->forks)
+	{
 		free(data->forks);
+		data->forks = NULL;
+	}
 	if (data->philos)
+	{
 		free(data->philos);
+		data->forks = NULL;
+	}
 }
