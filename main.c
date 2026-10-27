@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:45:22 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/25 17:52:56 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ int	main(int argc, char **argv)
 		return (1);
 
 	//initialize structures, allocate memory, and INIT MUTEXES
-	// (initializing data.write_lock, data.dead_lock, data.meal_lock,
+	// (initializing data.write_lock, data.flag_lock, data.meal_lock,
 	// and an array of forks using pthread_mutex_init)
 	if (init_all(&data) != 0)
 		return (1);
 
 	//start the simulation (creating my threads)
 	if (start_simulation(&data) != 0)
+	{
+		free_and_destroy(&data);
 		return (1);
+	}
 
 	// the supervisor loop Monitor for deaths
 	// Main thread should sit in a loop here checking if anyone starved
@@ -38,7 +41,7 @@ int	main(int argc, char **argv)
 
 	// cleanup
 	// (pthread_mutex_destroy for all mutexes, free all mallocs)
-	// free_and_destroy(&data);
+	free_and_destroy(&data);
 	return (0);
 }
 

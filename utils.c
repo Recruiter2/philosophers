@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:37:01 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/26 22:17:38 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	free_and_destroy(t_data	*data)
 
 	// Destroy shared lock mutexes
 	pthread_mutex_destroy(&data->write_lock);
-	pthread_mutex_destroy(&data->dead_lock);
+	pthread_mutex_destroy(&data->flag_lock);
 	pthread_mutex_destroy(&data->meal_lock);
 
 	// Free heap-allocated memory (assuming these were malloc'd in init)

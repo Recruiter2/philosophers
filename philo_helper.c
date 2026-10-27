@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:43:34 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/25 19:27:51 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	check_if_dead(t_data *data)
 {
 	int	is_dead;
 
-	pthread_mutex_lock(&data->dead_lock);
+	pthread_mutex_lock(&data->flag_lock);
 	is_dead = data->dead_flag;
-	pthread_mutex_unlock(&data->dead_lock);
+	pthread_mutex_unlock(&data->flag_lock);
 	return (is_dead);
 }
 

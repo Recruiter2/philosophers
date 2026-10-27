@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 21:02:08 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/26 17:37:34 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	init_all(t_data *data)
 
 	//initialize global data mutexes
 	pthread_mutex_init(&data->write_lock, NULL);
-	pthread_mutex_init(&data->dead_lock, NULL);
+	pthread_mutex_init(&data->flag_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 
 	//initialize all fork mutexes
@@ -76,7 +76,17 @@ int	start_simulation(t_data *data)
 		//create a thread for each philosopher
 		if (pthread_create(&data->philos[i].thread, NULL, &philosopher_routine, &data->philos[i]) != 0)
 		{
-			// Note : in a bulletproof project, we add logic here to join threads already created before return and arror
+			// Failsafe: if a thread fails to create, stop everything
+			pthread_mutex_lock(&data->flag_lock);
+			data->dead_flag = 1;
+			pthread_mutex_unlock(&data->flag_lock);
+
+			//join the threads that were successfully created
+			while (i > 0)
+			{
+				i--;
+				pthread_join(data->philos[i].thread, NULL);
+			}
 			return (1);
 		}
 		i++;

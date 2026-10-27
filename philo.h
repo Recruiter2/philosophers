@@ -35,7 +35,7 @@ typedef struct s_data
 
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	flag_lock;
 	pthread_mutex_t	meal_lock;
 
 	t_philo		*philos;
@@ -60,5 +60,6 @@ long	get_current_time(void);
 
 void	monitor_loop(t_data *data);
 
+void	free_and_destroy(t_data	*data);
 
 #endif

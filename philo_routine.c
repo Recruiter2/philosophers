@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 00:23:17 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/24 21:23:03 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*philosopher_routine(void *arg)
 
 	while (!check_if_dead(philo->data)) //sim loop
 	{
-		// Check if someone died (requires locking dead_lock)
+		// Check if someone died (requires locking flag_lock)
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a fork");
 		// EDGE CASE: if there is only 1 philosopher,they only have 1 fork.
@@ -70,7 +70,7 @@ void	*philosopher_routine(void *arg)
 	}
 	return (NULL);
 }
-
+/*
 int	start_simulation(t_data *data)
 {
 	int	i;
@@ -95,3 +95,4 @@ int	start_simulation(t_data *data)
 	}
 	return (0);
 }
+	//*/

@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 23:59:14 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/26 23:06:25 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 01:04:43 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static	int	check_philosopher_death(t_philo *philo, t_data *data)
 		// philosopher can print anything after the death message.
 
 		// 2. Set the global dead flag so threads stop
-		pthread_mutex_lock(&data->dead_lock);
+		pthread_mutex_lock(&data->flag_lock);
 		data->dead_flag = 1;
-		pthread_mutex_unlock(&data->dead_lock);
+		pthread_mutex_unlock(&data->flag_lock);
 		return (1);
 	}
 	return (0);
@@ -74,9 +74,9 @@ void	monitor_loop(t_data *data)
 	// if argument 5 was provided and everyon ate enough, end simulation
 	if (data->must_eat_count != -1 && all_ate == 1)
 	{
-		pthread_mutex_lock(&data->dead_lock);
+		pthread_mutex_lock(&data->flag_lock);
 		data->dead_flag = 1; //Signal threads to stop
-		pthread_mutex_unlock(&data->dead_lock);
+		pthread_mutex_unlock(&data->flag_lock);
 		return;  //if everyone ate enough, exit the monitor loop
 	}
 
