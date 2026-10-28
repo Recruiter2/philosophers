@@ -6,13 +6,11 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 23:59:14 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 13:34:17 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/28 00:27:12 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <bits/pthreadtypes.h>
-#include <pthread.h>
 
 /*
 	Checks if a single philosopher starved.
@@ -29,15 +27,16 @@ static	int	check_philosopher_death(t_philo *philo, t_data *data)
 	if (time_since_last_meal >= data->time_to_die)
 	{
 		//Announce death
-		pthread_mutex_lock(&data->write_lock);
-		printf("%ld %d died \n", get_current_time() - data->start_time, philo->id);
+		pthread_mutex_lock(&data->write_lock);//error
 		// Notice we DO NOT unlock write_lock here. This ensures no other
 		// philosopher can print anything after the death message.
-
-		// 2. Set the global dead flag so threads stop
+		printf("%ld %d died \n", get_current_time() - data->start_time, philo->id);
+		// Set the global dead flag so threads stop
 		pthread_mutex_lock(&data->flag_lock);
 		data->dead_flag = 1;
+		// print death message
 		pthread_mutex_unlock(&data->flag_lock);
+		pthread_mutex_unlock(&data->write_lock);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:45:22 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 14:56:02 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 18:15:48 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	//parse arguments
 	if (check_args(argc, argv, &data) != 0)
 		return (1);
-	printf("passed  args check\n ");
+	//printf("passed  args check\n ");
 
 	//initialize structures, allocate memory, and INIT MUTEXES
 	// (initializing data.write_lock, data.flag_lock, data.meal_lock,
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (init_all(&data) != 0)
 		return (1);
 
-	printf("reached start simulation\n ");
+	//printf("reached start simulation\n ");
 
 	//start the simulation (creating my threads)
 	if (start_simulation(&data) != 0)
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 
 	// the supervisor loop Monitor for deaths
 	// Main thread should sit in a loop here checking if anyone starved
-	printf("reached monitor loop\n ");
+	//printf("reached monitor loop\n ");
 	monitor_loop(&data);
 	// or if everyone ate enough. If someone dies, it sets.dead_flag = 1.
 	// check_death(&data);

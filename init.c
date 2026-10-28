@@ -6,7 +6,7 @@
 /*   By: tzinaliy <tzinaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 21:02:08 by tzinaliy          #+#    #+#             */
-/*   Updated: 2026/10/27 14:58:18 by tzinaliy         ###   ########.fr       */
+/*   Updated: 2026/10/27 20:50:06 by tzinaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_all(t_data *data)
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_of_philos);
 	data->philos = malloc(sizeof(t_philo) * data->num_of_philos);
 	if (!data->forks || !data->philos)
-		return (1);
+		return (1);//error
 
 	//initialize global data mutexes
 	pthread_mutex_init(&data->write_lock, NULL);

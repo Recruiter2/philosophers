@@ -4,6 +4,23 @@ _This project has been created as part of the 42 curriculum by tzinaliy._
 The goal of the Dining Philosophers problem, is to get familiar with threads mutexes and learn basics of threading a process. 
 
 
+# Philosophers 42 - Architecture Overview
+
+This project simulates the Dining Philosophers problem using threads and mutexes.
+
+## Core Structure
+- **Main Thread (The Monitor):** Parses arguments, initializes structures, creates the philosopher threads, and then enters an infinite monitoring loop. Its sole job is to watch for deaths or track if everyone ate their required meals.
+- **Child Threads (The Philosophers):** Each philosopher is a separate thread (`pthread_create`). They run independently in a continuous loop of `Eat -> Sleep -> Think`.
+- **Mutexes (The Forks & Data Locks):** To prevent data races (multiple threads writing/reading the same variable simultaneously), we use `pthread_mutex_t`:
+  - `forks`: An array of mutexes. A philosopher must lock two adjacent forks to eat.
+  - `write_lock`: Ensures only one thread can print to the terminal at a time, preventing garbled output.
+  - `meal_lock`: Protects reads/writes to `last_meal_time` and `meals_eaten`.
+  - `flag_lock`: Protects reads/writes to the global `dead_flag`.
+
+## The Monitor insights
+To ensure the strict 10ms death announcement constraint, the main thread continuously iterates through the philosophers. If it detects `current_time - last_meal_time > time_to_die`, it locks the `write_lock`, announces the death, flips the `dead_flag`, and release the write lock. This ensures the simulation stops cleanly and no other philosopher can output text after a death.
+
+
 # Instructions
 
 This program is written in C language and thus needs the **`gcc` or `clang`
@@ -57,9 +74,18 @@ Asan (debug):
 
 - https://www.osc.edu/resources/getting_started/howto/howto_use_address_sanitizer
 
+Flags to check memory, data race
 
+```bash
+-fsanitize=thread
+```
+
+Valgrind
+```bash
+valgrind --fair-sched=yes --tool=helgrind 
+```
 
 ## How was AI used? 
-LLMs were ocasionally used as a tutor. For the following tasks: explain code and different concepts such as threads; explaining the project. I used llm to explain the parameters and make it easy to draw table of parameters in README, write some comments. I used llm to help fixing data race issue in my code. I didn't use it for anything else.
+LLMs were ocasionally used as a tutor. For the following tasks: explain code and different concepts such as threads; explaining the project. I used llm to explain the parameters and make it easy to draw table of parameters in README, write some comments. I used llm to help fixing data race issue in my code. I wrote the whole project with ai.
 
 
